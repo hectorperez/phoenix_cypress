@@ -35,5 +35,5 @@ phx_cypress-*.tar
 npm-debug.log
 /assets/node_modules/
 
-cypress/videos/*.mp4
-cypress/screenshots/*.png
+cypress/videos/*
+cypress/screenshots/*
