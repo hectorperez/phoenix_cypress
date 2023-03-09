@@ -1,18 +1,55 @@
-# PhxCypress
+# Phoenix 1.7 with Cypress Tutorial
 
-To start your Phoenix server:
+To have an overview of the set up, have a look at Cypress' PR [#1](https://github.com/hectorperez/phoenix_cypress/pull/1/files)
 
-  * Run `mix setup` to install and setup dependencies
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+## Install Phoenix 1.7 and start the server:
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+```elixir
+mix phx.new phx_cypress
+mix deps.get
+mix ecto.setup
+mix phx.server
+```
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+If you go to localhost:4000 in your browser, you'll see Phoenix's default root page: "Peace of mind from prototype to production..."
 
-## Learn more
+## Install Cypress:
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+```
+cd assets
+npm install cypress --save-dev
+cd ..
+```
+
+## Ignore screenshots and videos in `.gitignore`
+``` 
+cypress/screenshots/*
+cypress/videos/*
+```
+
+Unless you change the set up, the tests should be in `cypress/e2e`.
+We have some example tests already there, but let's create our first one:
+
+## Create your first Cypress test
+Create a file in `cypress/e2e/home.cy.js`:
+
+```js
+/// <reference types="cypress" />
+
+describe('home', () => {
+  it('returns Peace of mind', () => {
+    cy.visit('localhost:4000/')
+    cy.contains('Peace of mind from prototype to production')
+  })
+})
+```
+
+## Open Cypress to run tests in visual mode
+```
+./assets/node_modules/cypress/bin/cypress open
+```
+
+## Run Cypress tests from the console
+```
+./assets/node_modules/cypress/bin/cypress run
+```
